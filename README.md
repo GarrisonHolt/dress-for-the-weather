@@ -1,3 +1,3 @@
 # Dress for the Weather
-## Simple app to get the current weather of Nashville.
-### Will release new version for dyanmic city names.
+## Simple app to get the current weather for a city of your choice.
+### Also tells you to wear based on certain weather variables.
