@@ -1,11 +1,8 @@
 import requests
 import json
 import secrets
-
-URL = f'https://api.weatherapi.com/v1/forecast.json?key={secrets.API_KEY}&q=Nashville&days=1&aqi=no&alerts=yes'
-
-
-def get_weather():
+def get_weather(city):
+    URL = f'https://api.weatherapi.com/v1/forecast.json?key={secrets.API_KEY}&q={city}&days=1&aqi=no&alerts=yes'
     request = requests.get(URL)
     if request.status_code == 200:
         data = json.loads(request.text)
@@ -16,15 +13,18 @@ def get_weather():
 
 
 def generate_dress(data) -> None:
-    if data:
-        print('Current temperature:', data['current']['temp_f'])
-        if data['current']['temp_f'] > 80:
-            print('Current temperature is hot... Wear short sleeves.')
-        elif 60 <= data['current']['temp_f'] < 80:
-            print('Current temperature is cool... Wear long sleeves.')
+    temp_decimal = data['current']['temp_f']
+    temp = round(temp_decimal, 0)
+    condition = data['current']['condition']['text']
+    if temp:
+        print('Current temperature:', temp)
+        if temp > 75:
+            print('Wear short sleeves.')
+        elif 60 <= temp < 750:
+            print('Wear long sleeves.')
         else:
-            print('Current temperature is cold... Wear long sleeves and a coat.')
+            print('Wear long sleeves and a coat.')
 
-        if data['current']['condition']['text'] != 'Sunny':
-            print('Not sunny. Might want to bring a rain jacket.')
+    if condition != 'Sunny':
+        print('Might want to bring a rain jacket too.')
 
