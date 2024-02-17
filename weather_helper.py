@@ -20,7 +20,7 @@ def generate_dress(data) -> None:
         print('Current temperature:', temp)
         if temp > 75:
             print('Wear short sleeves.')
-        elif 60 <= temp < 750:
+        elif 60 <= temp < 75:
             print('Wear long sleeves.')
         else:
             print('Wear long sleeves and a coat.')
